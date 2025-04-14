@@ -26,7 +26,7 @@
           <div class="qty-control">
             <button @click="decreaseQty(item.id)">−</button>
             <span>{{ item.qty }}</span>
-            <button @click="addToCart(item)">+</button>
+            <button @click="increaseQty(item)">+</button>
           </div>
 
           <span>${{ item.qty * item.price }}</span>
@@ -51,6 +51,13 @@ import { storeToRefs } from 'pinia'
 const cartStore = useCartStore()
 const { cart, totalPrice } = storeToRefs(cartStore)
 const { addToCart, removeFromCart, decreaseQty } = cartStore
+const increaseQty = (item) => {
+  if (item.qty < item.instock) {
+    addToCart(item)
+  } else {
+    alert('Reached max available stock!')
+  }
+}
 </script>
 
 <style scoped>

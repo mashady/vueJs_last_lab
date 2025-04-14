@@ -29,8 +29,13 @@
   })
   
   const addToCart = (product) => {
+  if (product.instock > 0) {
     cartStore.addToCart(product)
+    product.instock-- 
+  } else {
+    alert('This product is out of stock!')
   }
+}
   </script>
   
   <style scoped>
